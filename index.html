@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="We introduce a ML-ready dataset and benchmark models, for dense high-resolution global biomass estimation.
+                                      Explore state-of-the-art results and detailed methodology.">
+  <meta name="keywords" content="Remote sensing, Biomass estimation, Global scale, Dataset, Deep Learning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://agbdataset.github.io/">
+  <title>AGBD: A Global-scale Biomass Dataset</title>
+
+
+  <meta property="og:title" content="AGBD: A Global-scale Biomass Dataset">
+  <meta property="og:description" content="We introduce a ML-ready dataset and benchmark models, for dense high-resolution global biomass estimation.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://agbdataset.github.io/">
+
+  <!-- Google tag (gtag.js) -->
+  <!--
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ESZM8CZ1BH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-ESZM8CZ1BH');
+  </script>
+  -->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/twentytwenty.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/fire.svg">
+
+
+  <script src="./js/jquery-3.2.1.min.js"></script>
+  <script src="./js/jquery.event.move.js"></script>
+  <script src="./js/jquery.twentytwenty.js"></script>
+  <script src="./js/bulma-carousel.min.js"></script>
+  <script src="./js/bulma-slider.min.js"></script>
+  <script src="./js/fontawesome.all.min.js"></script>
+
+  <!--MathJax-->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 is-size-3-mobile publication-title">AGBD: A Global-scale Biomass Dataset</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://ghjuliasialelli.github.io/">Ghjulia Sialelli</a><sup>🛰️</sup>,</span>
+            <span class="author-block">
+              <a href="https://petertor.github.io/">Torben Peters</a><sup>🛰️</sup>,</span>
+            <span class="author-block">
+            </span>
+            <span class="author-block">
+              <a href="https://dm3l.uzh.ch/wegner/group-leader">Jan Dirk Wegner</a><sup>🌲</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.ch/citations?user=FZuNgqIAAAAJ&hl=en">Konrad Schindler</a><sup>🛰️</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors footer-section">
+            <span class="author-block-footer"><sup>🛰️</sup>Photogrammetry and Remote Sensing, ETH Zurich</span>
+            <span class="author-block-footer"><sup>🌲</sup>Department of Mathematical Modeling and Machine Learning, University of Zurich</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2406.04928" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/ghjuliasialelli/AGBD" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset -->
+              <span class="link-block">
+                <a href="https://huggingface.co/datasets/prs-eth/AGBD" target="_blank" rel="noopener noreferrer"
+                    class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    &#129303;
+                </span>
+                <span>Dataset</span>
+                </a>
+                </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img id="method_train" width="100%" src="./static/imgs/overview.png" alt="Overview of the method"/>
+      <h2 class="subtitle has-text-centered">
+          <span class="dnerf">AGBD</span> is the first globally representative, high-resolution, machine learning-ready dataset for biomass estimation.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<section class="section pt-0 pb-4">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3 is-spaced">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Accurate estimates of Above Ground Biomass (AGB) are essential in addressing two of humanity’s biggest challenges: climate change and biodiversity loss. Existing datasets for AGB estimation from satellite imagery are limited. Either they focus on specific, local regions at high resolution, or they offer global coverage at low resolution. There is a need for a machine learning-ready, globally representative, high-resolution benchmark dataset. Our findings indicate significant variability in biomass estimates across different vegetation types, emphasizing the necessity for a dataset that accurately captures global diversity. To address these gaps, we introduce a comprehensive new dataset that is globally distributed, covers a range of vegetation types, and spans several years. This dataset combines AGB reference data from the GEDI mission with data from Sentinel-2 and PALSAR-2 imagery. Additionally, it includes pre-processed high-level features such as a dense canopy height map, an elevation map, and a land-cover classification map. We also produce a dense, high-resolution (10 m) map of AGB predictions for the entire area covered by the dataset. Rigorously tested, our dataset is accompanied by several benchmark models and is publicly available. It can be easily accessed using a single line of code, offering a solid basis for efforts towards global AGB estimation.
+          </p>
+      </div>
+    </div>
+  </div>
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+      <pre><code>
+        #!pip install datasets
+        from datasets import load_dataset
+        dataset = load_dataset("prs-eth/AGBD", streaming=True)["train"] # or test, val
+      </code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Paper results. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths" style="width: 100%;">
+        <h2 class="title is-3">Quantitative results</h2>
+        <div class="content has-text-justified">
+          <p>
+            Our results indicate that including input features beyond Sentinel-2 is beneficial for the task of AGB estimation, and that more complex models tend to better capture the complex relationship between input features and AGB.
+          </p>
+          <div class="publication-results">
+            <img id="method_train" width="100%" src="./static/imgs/table_results.png" alt=Results scheme"/>
+            <p style="font-size: 10px;" class="subtitle has-text-centered"> Table 2. Mean test RMSE (↓) and associated standard deviation per model, with various inputs. Crosses denote the presence of a feature, values in brackets denote patch size. Values are colored from dark red (higher) to dark blue (lower).
+          </div>
+      </div>
+    </div>
+    <!--/ Paper results. -->
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Paper results. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths" style="width: 100%;">
+        <h2 class="title is-3">Qualitative results</h2>
+        <div class="content has-text-justified">
+          <p>
+            The high spatial resolution of our estimates is able to preserve spatial details that are not captured in the CCI product, meaning that they would not be restored by conventional upscaling of existing maps.
+          </p>
+          <div class="publication-results">
+            <img id="method_train" width="100%" src="./static/imgs/comp.png" alt="Results scheme"/>
+            <p style="font-size: 10px;" class="subtitle has-text-centered"> Figure 8. Sentinel-2 tile 30NXM (Ghana), our best model’s prediction, the corresponding ESA CCI map, and GEDI L4B product. Global view (top) and zoomed in views (bottom).
+          </div>
+      </div>
+    </div>
+    <!--/ Paper results. -->
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Paper results. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths" style="width: 100%;">
+        <h2 class="title is-3">More results</h2>
+        <div class="content has-text-justified">
+          <p>
+            A common issue for biomass estimation is the over-estimation of low biomass values and under-estimation of high values. Our method somewhat mitigates this phenomenon, compared with the ESA CCI map.
+          </p>
+          <div class="publication-results">
+            <img id="method_train" width="100%" src="./static/imgs/binned-residuals.png" alt="Results scheme"/>
+            <p style="font-size: 10px;" class="subtitle has-text-centered"> Figure 5. Binned test residuals for the best-performing model of each architecture, and for the ESA CCI predictions.
+          </div>
+      </div>
+      <div class="content has-text-justified">
+        <p>
+          Another issue for AGB estimation is saturation, which happens when beyond a certain AGB threshold, the remote sensing information no longer reflects the change in biomass, making it challenging to estimate high values. Our results indicate that having access to additional features makes the AGB estimates better, particularly in the higher bins.
+        </p>
+        <div class="publication-results">
+          <img id="method_train" width="100%" src="./static/imgs/saturation.png" alt="Results scheme"/>
+          <p style="font-size: 10px;" class="subtitle has-text-centered"> Figure 7. Binned mean test RMSE (↓) and associated standard deviation per model, with various inputs.
+        </div>
+    </div>
+    </div>
+    <!--/ Paper results. -->
+  </div>
+</section>
+
+
+<script>
+  $(window).on('load', function() {
+    bulmaCarousel.attach('#results-carousel-horizontal', {
+      slidesToScroll: 1,
+      slidesToShow: 3,
+      loop: true,
+      infinite: true,
+      autoplay: true,
+      autoplaySpeed: 10000
+    });
+
+    /*bulmaCarousel.attach('#results-carousel-vertical', {
+      slidesToScroll: 1,
+      slidesToShow: 5,
+      loop: true,
+      autoplay: false,
+    });*/
+
+    $(".twentytwenty-container-top").twentytwenty({
+      before_label: 'Input',
+      after_label: 'Ours',
+      default_offset_pct: 0.5,
+    });
+
+    $(".twentytwenty-container-bottom").twentytwenty({
+      before_label: 'MSIT',
+      after_label: 'Ours',
+      default_offset_pct: 0.5,
+    });
+
+    $('.results-carousel').css({
+      'max-height': '2000px',
+      'visibility': 'visible'
+    });
+  });
+</script>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">Citation</h2>
+    <p>If you find our work helpful, consider citing our paper 🙂</p>
+    <pre><code>@article{sialelli2025agbd,
+      title={AGBD: A Global-scale Biomass Dataset}, 
+      author={Ghjulia Sialelli and Torben Peters and Jan D. Wegner and Konrad Schindler},
+      year={2025},
+      journal={arXiv preprint arXiv:2406.04928}
+}
+</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            Website template based on <a href="https://nerfies.github.io/">Nerfies</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
